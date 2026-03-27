@@ -32,7 +32,7 @@ public class ApiKeyController {
 
     @PostMapping
     public ResponseEntity<ApiKey> createKey(@Valid @RequestBody CreateKeyRequest request) {
-        ApiKey created = service.createKey(request.name(), request.owner());
+        ApiKey created = service.createKey(request.name());
         return ResponseEntity.status(201).body(created);
     }
 
@@ -44,9 +44,6 @@ public class ApiKeyController {
 
     public record CreateKeyRequest(
         @NotBlank(message = "Name cannot be empty")
-        String name,
-
-        @NotBlank(message = "Owner cannot be empty")
-        String owner
+        String name
     ) {}
 }
