@@ -34,9 +34,10 @@ public class ApiKeyService {
                 .orElseThrow(() -> new ResourceNotFoundException("API key not found with id: "+id));
     }
 
-    public ApiKey createKey(String name, String owner) {
+    public ApiKey createKey(String name) {
+        String email = getCurrentUserEmail();
         String generated = UUID.randomUUID().toString().replace("-", "");
-        ApiKey key = new ApiKey(name, generated, owner);
+        ApiKey key = new ApiKey(name, generated, email);
         return repository.save(key);
     }
 
