@@ -3,6 +3,7 @@ package com.hamza.apikeymanager.service;
 import com.hamza.apikeymanager.exception.ResourceNotFoundException;
 import com.hamza.apikeymanager.model.ApiKey;
 import com.hamza.apikeymanager.repository.ApiKeyRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,12 @@ public class ApiKeyService {
 
     public ApiKeyService(ApiKeyRepository repository) {
         this.repository = repository;
+    }
+
+    private String getCurrentUserEmail(){
+        return SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getName();
     }
 
     public List<ApiKey> getAllKeys() {
