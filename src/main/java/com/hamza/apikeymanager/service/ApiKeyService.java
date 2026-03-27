@@ -25,7 +25,8 @@ public class ApiKeyService {
     }
 
     public List<ApiKey> getAllKeys() {
-        return repository.findAll();
+        String email = getCurrentUserEmail();
+        return repository.findByOwner(email);
     }
 
     public ApiKey getKeyById(Long id){
